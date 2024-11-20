@@ -1,0 +1,13 @@
+.light-mode {
+    color-scheme: light;
+    background-color: #f2f0e7;
+    color: black;
+  }
+  .dark-mode {
+    color-scheme: dark;
+    background-color: black;
+    color: white;
+  }
+  #nav >li a.active {
+    text-decoration: underline;
+  }
