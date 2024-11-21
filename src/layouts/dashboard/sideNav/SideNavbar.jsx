@@ -4,13 +4,18 @@ import axios from "axios";
 import BuyerNav from "../buyer/buyerNav/BuyerNav";
 import SellerNav from "../seller/sellerNav/SellerNav";
 import AdminNav from "../admin/adminNav/AdminNav";
+import { useNavigate } from "react-router-dom";
 
 function SideNavbar() {
-  const { user } = useContext(AuthContext);
+  const navigate = useNavigate()
+  const { user,logOut } = useContext(AuthContext);
   const [userData, setUserData] = useState(null); 
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
-
+  const handleLogout =()=>{
+    logOut();
+    navigate('/')
+  }
   console.log("User:", user);  // Debug: Check user object
 
   useEffect(() => {
@@ -37,14 +42,14 @@ function SideNavbar() {
   if (error) return <div>Error: {error}</div>;
 
   return (
-    <div className="flex flex-col justify-between">
+    <div className="flex flex-col h-screen justify-between">
       <div>
         {userData?.role === 'buyer' && <BuyerNav />}
         {userData?.role === 'seller' && <SellerNav />}
         {userData?.role === 'admin' && <AdminNav />}
       </div>
       <div>
-        <button className="w-full btn">Log Out</button>
+        <button onClick={()=>handleLogout()} className="w-full btn">Log Out</button>
       </div>
     </div>
   );

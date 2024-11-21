@@ -5,13 +5,13 @@ import { initializeApp } from "firebase/app";
 
 // Your web app's Firebase configuration
 const firebaseConfig = {
-  apiKey: "AIzaSyCYJCslo93mo1M8Lzni36FTLoQYjM1jUsE",
-  authDomain: "seba-corner.firebaseapp.com",
-  projectId: "seba-corner",
-  storageBucket: "seba-corner.appspot.com",
-  messagingSenderId: "668794902554",
-  appId: "1:668794902554:web:9033310e33205bb51599a3",
-  measurementId: "G-CQLZB7WMB7"
+  apiKey: "AIzaSyDOjzwQcH_VsnUAXJkspe5GIKmJDWaAe40",
+  authDomain: "wave3-d9177.firebaseapp.com",
+  projectId: "wave3-d9177",
+  storageBucket: "wave3-d9177.firebasestorage.app",
+  messagingSenderId: "686289419830",
+  appId: "1:686289419830:web:dfcb30861c39890760e297",
+  measurementId: "G-HHDNG0P6VX"
 };
 
 // Initialize Firebase
