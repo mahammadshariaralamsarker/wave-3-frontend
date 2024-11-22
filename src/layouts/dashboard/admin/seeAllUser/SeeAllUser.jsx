@@ -8,7 +8,7 @@ function SeeAllUser() {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const [editingUser, setEditingUser] = useState(null);
-  const [newRole, setNewRole] = useState('');
+  const [newRole, setNewRole] = useState("");
 
   useEffect(() => {
     if (user?.email) {
@@ -18,7 +18,7 @@ function SeeAllUser() {
 
   const fetchUsers = async () => {
     try {
-      const { data } = await axios.get('http://localhost:5000/users');
+      const { data } = await axios.get("https://wave55.vercel.app/users");
       setUserData(data);
     } catch (err) {
       setError(err.message);
@@ -28,7 +28,7 @@ function SeeAllUser() {
   };
 
   const handleRoleChange = async (email) => {
-    const updatedUsers = userData.map(user => {
+    const updatedUsers = userData.map((user) => {
       if (user.email === email) {
         return { ...user, role: newRole };
       }
@@ -38,7 +38,10 @@ function SeeAllUser() {
 
     try {
       // Make the request to update the role on the backend
-      const response = await axios.put(`http://localhost:5000/users/${email}`, { role: newRole });
+      const response = await axios.put(
+        `https://wave55.vercel.app/users/${email}`,
+        { role: newRole }
+      );
       console.log("Response after role update:", response);
 
       // Re-fetch users to ensure data is consistent
@@ -55,8 +58,8 @@ function SeeAllUser() {
     console.log("Deleting user:", email);
     if (window.confirm("Are you sure you want to delete this user?")) {
       try {
-        await axios.delete(`http://localhost:5000/users/${email}`);
-        fetchUsers();  
+        await axios.delete(`https://wave55.vercel.app/users/${email}`);
+        fetchUsers();
         setUserData(userData);
       } catch (err) {
         console.error("Error deleting user:", err.message);
@@ -65,7 +68,8 @@ function SeeAllUser() {
   };
 
   if (loading) return <div className="text-center mt-5">Loading...</div>;
-  if (error) return <div className="text-center mt-5 text-red-500">Error: {error}</div>;
+  if (error)
+    return <div className="text-center mt-5 text-red-500">Error: {error}</div>;
 
   return (
     <div className="p-5">
@@ -84,10 +88,18 @@ function SeeAllUser() {
           <tbody>
             {userData.map((user, index) => (
               <tr key={index} className="text-center">
-                <td className="border border-gray-300 px-4 py-2">{index + 1}</td>
-                <td className="border border-gray-300 px-4 py-2">{user.name || 'N/A'}</td>
-                <td className="border border-gray-300 px-4 py-2">{user.email}</td>
-                <td className="border border-gray-300 px-4 py-2">{user.role}</td>
+                <td className="border border-gray-300 px-4 py-2">
+                  {index + 1}
+                </td>
+                <td className="border border-gray-300 px-4 py-2">
+                  {user.name || "N/A"}
+                </td>
+                <td className="border border-gray-300 px-4 py-2">
+                  {user.email}
+                </td>
+                <td className="border border-gray-300 px-4 py-2">
+                  {user.role}
+                </td>
                 <td className="border border-gray-300 px-4 py-2">
                   {/* Edit Button */}
                   <button

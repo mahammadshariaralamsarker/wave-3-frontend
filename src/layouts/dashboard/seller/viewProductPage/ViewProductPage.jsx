@@ -1,6 +1,6 @@
-import { useState, useEffect, useContext } from 'react';
-import axios from 'axios';
-import { AuthContext } from '../../../../provider/AuthProvider';
+import { useState, useEffect, useContext } from "react";
+import axios from "axios";
+import { AuthContext } from "../../../../provider/AuthProvider";
 
 function ViewProductPage() {
   const [products, setProducts] = useState([]);
@@ -15,22 +15,24 @@ function ViewProductPage() {
 
   const fetchProduct = async () => {
     try {
-      const response = await axios.get(`http://localhost:5000/products/${user.email}`);
+      const response = await axios.get(
+        `https://wave55.vercel.app/products/${user.email}`
+      );
       setProducts(response.data);
       console.log(response.data);
     } catch (err) {
-      console.error('Error fetching product:', err);
+      console.error("Error fetching product:", err);
       setError(err.message);
     }
   };
 
   const handleDelete = async (productId) => {
     try {
-      await axios.delete(`http://localhost:5000/products/${productId}`);
-      setProducts(products.filter(product => product._id !== productId));
-      console.log('Product deleted successfully');
+      await axios.delete(`https://wave55.vercel.app/products/${productId}`);
+      setProducts(products.filter((product) => product._id !== productId));
+      console.log("Product deleted successfully");
     } catch (err) {
-      console.error('Error deleting product:', err);
+      console.error("Error deleting product:", err);
       setError(err.message);
     }
   };

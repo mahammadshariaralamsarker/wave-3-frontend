@@ -5,7 +5,7 @@ function BuyerNav() {
     <div>
         <ul className="flex flex-col gap-5 mb-8 mt-10 ">
           <li>
-            <NavLink className="btn  w-full" to="/dashboard/addProduct">
+            <NavLink className="btn  w-full" to="/dashboard/buyerwishlist">
               WishList
             </NavLink>
           </li>

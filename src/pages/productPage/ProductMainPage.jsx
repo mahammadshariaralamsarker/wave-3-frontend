@@ -21,7 +21,7 @@ function ProductMainPage() {
 
   const fetchProducts = async () => {
     try {
-      const { data } = await axios.get("http://localhost:5000/products");
+      const { data } = await axios.get("https://wave55.vercel.app/products");
       setProductData(data);
       setFilteredData(data);
     } catch (err) {
@@ -81,7 +81,9 @@ function ProductMainPage() {
 
   return (
     <div className="p-6 min-h-screen bg-gray-50">
-      <h1 className="text-3xl font-bold mb-6 text-center text-gray-800">Our Products</h1>
+      <h1 className="text-3xl font-bold mb-6 text-center text-gray-800">
+        Our Products
+      </h1>
 
       {/* Filters */}
       <div className="mb-6 flex flex-wrap gap-4 justify-center">
@@ -140,7 +142,9 @@ function ProductMainPage() {
       ) : error ? (
         <p className="text-red-500 text-center">Error: {error}</p>
       ) : filteredData.length === 0 ? (
-        <p className="text-center text-gray-500">No products match your criteria.</p>
+        <p className="text-center text-gray-500">
+          No products match your criteria.
+        </p>
       ) : (
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
           {filteredData.map((product) => (
@@ -153,13 +157,22 @@ function ProductMainPage() {
                 alt={product.name}
                 className="w-full h-48 object-cover rounded-md mb-4"
               />
-              <h2 className="text-lg font-semibold text-gray-800">{product.name}</h2>
-              <p className="text-gray-600 mt-2">Price: <span className="text-blue-500 font-medium">${product.price}</span></p>
+              <h2 className="text-lg font-semibold text-gray-800">
+                {product.name}
+              </h2>
+              <p className="text-gray-600 mt-2">
+                Price:{" "}
+                <span className="text-blue-500 font-medium">
+                  ${product.price}
+                </span>
+              </p>
               <p className="text-gray-500">Category: {product.category}</p>
               <p className="text-gray-500">Brand: {product.brand}</p>
-              <p className="text-gray-500 line-clamp-2">Description: {product.description}</p>
+              <p className="text-gray-500 line-clamp-2">
+                Description: {product.description}
+              </p>
               <button className="mt-4 w-full bg-blue-500 text-white py-2 rounded-lg hover:bg-blue-600 transition duration-300">
-                Add to wishlist 
+                Add to wishlist
               </button>
             </div>
           ))}

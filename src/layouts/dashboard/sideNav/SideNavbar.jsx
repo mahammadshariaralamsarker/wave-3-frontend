@@ -7,19 +7,19 @@ import AdminNav from "../admin/adminNav/AdminNav";
 import { useNavigate } from "react-router-dom";
 
 function SideNavbar() {
-  const navigate = useNavigate()
-  const { user,logOut } = useContext(AuthContext);
-  const [userData, setUserData] = useState(null); 
+  const navigate = useNavigate();
+  const { user, logOut } = useContext(AuthContext);
+  const [userData, setUserData] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
-  const handleLogout =()=>{
+  const handleLogout = () => {
     logOut();
-    navigate('/')
-  }
-  console.log("User:", user);  // Debug: Check user object
+    navigate("/");
+  };
+  console.log("User:", user); // Debug: Check user object
 
   useEffect(() => {
-    console.log("User in useEffect:", user);  // Debug: Check user object here
+    console.log("User in useEffect:", user); // Debug: Check user object here
     if (user?.email) {
       fetchDataByEmail();
     }
@@ -27,14 +27,16 @@ function SideNavbar() {
 
   const fetchDataByEmail = async () => {
     try {
-      const { data } = await axios.get(`http://localhost:5000/users/${user.email}`);
-      console.log("Fetched Data:", data);  // Debug: Check the fetched data
-      setUserData(data); 
+      const { data } = await axios.get(
+        `https://wave55.vercel.app/users/${user.email}`
+      );
+      console.log("Fetched Data:", data); // Debug: Check the fetched data
+      setUserData(data);
     } catch (err) {
       console.error("Error fetching data:", err.message);
       setError(err.message);
     } finally {
-      setLoading(false); 
+      setLoading(false);
     }
   };
 
@@ -44,12 +46,14 @@ function SideNavbar() {
   return (
     <div className="flex flex-col h-screen justify-between">
       <div>
-        {userData?.role === 'buyer' && <BuyerNav />}
-        {userData?.role === 'seller' && <SellerNav />}
-        {userData?.role === 'admin' && <AdminNav />}
+        {userData?.role === "buyer" && <BuyerNav />}
+        {userData?.role === "seller" && <SellerNav />}
+        {userData?.role === "admin" && <AdminNav />}
       </div>
       <div>
-        <button onClick={()=>handleLogout()} className="w-full btn">Log Out</button>
+        <button onClick={() => handleLogout()} className="w-full btn">
+          Log Out
+        </button>
       </div>
     </div>
   );

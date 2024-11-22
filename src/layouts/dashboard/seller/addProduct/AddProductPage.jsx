@@ -3,14 +3,14 @@ import axios from "axios";
 import { AuthContext } from "../../../../provider/AuthProvider";
 
 const AddProductForm = () => {
-  const {user} = useContext(AuthContext);
+  const { user } = useContext(AuthContext);
   const [product, setProduct] = useState({
     name: "",
     price: "",
     category: "",
     brand: "",
     description: "",
-    email:user.email
+    email: user.email,
   });
 
   const [loading, setLoading] = useState(false); // For button loading state
@@ -28,11 +28,15 @@ const AddProductForm = () => {
     setError(null);
 
     try {
-      const response = await axios.post("http://localhost:5000/product", product, {
-        headers: {
-          "Content-Type": "application/json",
-        },
-      });
+      const response = await axios.post(
+        "https://wave55.vercel.app/product",
+        product,
+        {
+          headers: {
+            "Content-Type": "application/json",
+          },
+        }
+      );
 
       console.log("Submitted Product:", response.data);
       alert("Product submitted successfully!");
@@ -47,7 +51,8 @@ const AddProductForm = () => {
       });
     } catch (error) {
       setError(
-        error.response?.data?.message || "Failed to submit product. Please try again."
+        error.response?.data?.message ||
+          "Failed to submit product. Please try again."
       );
     } finally {
       setLoading(false);
@@ -118,7 +123,11 @@ const AddProductForm = () => {
             required
           ></textarea>
         </div>
-        <button type="submit" style={{ marginRight: "10px" }} disabled={loading}>
+        <button
+          type="submit"
+          style={{ marginRight: "10px" }}
+          disabled={loading}
+        >
           {loading ? "Submitting..." : "Submit"}
         </button>
         <button

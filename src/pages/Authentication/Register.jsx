@@ -7,12 +7,8 @@ import axios from "axios";
 
 const Registration = () => {
   const navigate = useNavigate();
-  const {
-    signInWithGoogle,
-    createUser,
-    user,
-    logOut,
-  } = useContext(AuthContext);
+  const { signInWithGoogle, createUser, user, logOut } =
+    useContext(AuthContext);
 
   const validatePassword = (password) => {
     const passwordRegex =
@@ -33,7 +29,7 @@ const Registration = () => {
       toast.error("Please fill out all fields.");
       return;
     }
-    
+
     if (!validatePassword(pass)) {
       setPasswordError(
         "Password must include at least 8 characters, an uppercase, a lowercase, a number, and a special character."
@@ -41,12 +37,15 @@ const Registration = () => {
       return;
     }
     setPasswordError("");
-    createUser(email,pass)
+    createUser(email, pass);
     // setUser(createUser);
     const jobData = { email, role };
-    const { data } = await axios.post(`http://localhost:5000/users`, jobData);
-    navigate('/')
-    console.log(user);   
+    const { data } = await axios.post(
+      `https://wave55.vercel.app/users`,
+      jobData
+    );
+    navigate("/");
+    console.log(user);
   };
 
   const handleGoogleSignIn = async () => {
